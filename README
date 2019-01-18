@@ -1,0 +1,49 @@
+
+"""""
+
+POLARIZED SYNCHROTRON SIMULATIONS
+
+Marta Spinelli (2018) -University Of the Western Cape
+For more info on the simulations: arXiv:https://arxiv.org/abs/1802.03060
+
+"""""
+
+Generate polarized Q,U Stokes full sky maps in K (Kelvin)
+
+python genPolSynch.py --seed=SEED --start=START_FREQ --stop=STOP_FREQ --nchan=NCHAN --nside=NSIDE --filepath=FILEPATH --storeRM DATA_MWA.npz
+
+or (if RM maps already created)
+
+python genPolSynch.py --seed=SEED --start=START_FREQ --stop=STOP_FREQ --nchan=NCHAN --nside=NSIDE --filepath=FILEPATH  --readRM --fileq=FILEQ --fileu=FILEU DATA_MWA.npz
+
+   SEED : seed for random 
+
+   START_FREQ : starting frequency 
+   
+   STOP_FREQ  : stopping frequency
+   
+   NCHAN      : number of frequency channels
+
+   NSIDE      : Healpix map resolution 
+   
+   FILEPATH   : name of output path to files
+ 
+   FILEQ      : name of RM Q map fits file expected of the form FILEQ_nside[nside]_seed[seed]_[RM].fits
+
+   FILEU      : name of RM U map fits file expected of the form FILEU_nside[nside]_seed[seed]_[RM].fits
+
+     
+
+Output fits map Q will be at FILEPATH/map_Q_nside[nside]_freq[freq] freq in MHz (0p1 means 0.1 MHz)
+Output fits map U will be at FILEPATH/map_U_nside[nside]_freq[freq]
+
+If --storeRM:
+Output fits map RM Q will be at FILEPATH/mapRM_Q_nside[nside]_seed[seed]_[RM]
+Output fits map RM U will be at FILEPATH/mapRM_U_nside[nside]_seed[seed]_[RM]
+(with RM from 0 to 13) Note these maps are not in Kelvin.
+
+genRMmap.py is used to generate the full sky RM cube. invRM.py to transform from RM to frequency space. They are included in genPolSynch.py
+
+
+A file input_info.npz wil be created storing the frequencies values, nside and seed
+
